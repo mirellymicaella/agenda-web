@@ -1,0 +1,6 @@
+br\com\senac\agenda\dao\Conexao.class
+br\com\senac\servlet\LoginServlet.class
+br\com\senac\servlet\LogoutServlet.class
+br\com\senac\agenda\dao\UsuarioDAO.class
+br\com\senac\agenda\dao\DAO.class
+br\com\senac\agenda\model\Usuario.class
