@@ -1,7 +1,7 @@
 
 <jsp:include page="header.jsp"/>
 
- <div class="row">
+<div class="row" style="margin: 100px">
     <div class="col-xl-6">
       One of three columns
     </div>

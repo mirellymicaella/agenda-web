@@ -37,7 +37,7 @@ public class UsuarioDAO extends DAO<Usuario> {
             }
 
         } catch (Exception ex) {
-
+            System.out.println("Erro ao salvar ");
         } finally {
             try {
                 connection.close();
@@ -226,18 +226,18 @@ public class UsuarioDAO extends DAO<Usuario> {
     public static void main(String[] args) {
         UsuarioDAO dao = new UsuarioDAO();
 
-        List<Usuario> lista = dao.getByFiltro(null, "mi");
+      //  List<Usuario> lista = dao.getByFiltro(null, "mi");
 
-        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>> ++++" + lista.size());
+       // System.out.println(">>>>>>>>>>>>>>>>>>>>>>>> ++++" + lista.size());
 
-        for (Usuario u : lista) {
-            System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>" + u.getId() + " " + u.getNome() + " " + u.getSenha());
-        }
+      //  for (Usuario u : lista) {
+       //     System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>" + u.getId() + " " + u.getNome() + " " + u.getSenha());
+        //}
 
         //Usuario u = usuarioDAO.get(3);
         //System.out.println("USUARIO " + u.getNome());
-        //Usuario usuario = new Usuario("mirelly","123");
-        //dao.salvar(usuario);
+        Usuario usuario = new Usuario("pedro","123");
+        dao.salvar(usuario);
     }
 
 }
