@@ -1,11 +1,8 @@
 
 package br.com.senac.servlet;
 
-import br.com.senac.agenda.dao.UsuarioDAO;
-import br.com.senac.agenda.model.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,8 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-@WebServlet(name = "SalvarUsuarioServlet", urlPatterns = {"/usuario/SalvarUsuarioServlet"})
-public class SalvarUsuarioServlet extends HttpServlet {
+@WebServlet(name = "NovoContatoServlet", urlPatterns = {"/NovoContatoServlet"})
+public class NovoContatoServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -27,41 +24,34 @@ public class SalvarUsuarioServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-    
-    String mensagem = null;
-    
-    try{
+       
         String nome = request.getParameter("nome");
-        String senha = request.getParameter("senha");
-        String codigo = request.getParameter("codigo");
-        Integer id = null;
-
-            if (codigo != null && !codigo.trim().isEmpty()) {
-                id = new Integer(codigo);
-            }
+        String telefone = request.getParameter("telefone");
+        String celular = request.getParameter("celular");
+        String fax = request.getParameter("fax");
+        String cep = request.getParameter("cep");
+        String endereco = request.getParameter("endereco");
+        String numero = request.getParameter("numero");
+        String bairro = request.getParameter("bairro");
+        String cidade = request.getParameter("cidade");
+        String uf = request.getParameter("uf");
+        String email = request.getParameter("email");
         
-        Usuario usuario = new Usuario();
-        usuario.setId(0);
-        usuario.setNome(nome);
-        usuario.setSenha(senha);
-        
-        UsuarioDAO dao = new UsuarioDAO();
-        dao.salvar(usuario);
-        mensagem = "Salvo com sucesso!!";
-        request.setAttribute("mensagem", mensagem);
-        request.setAttribute("usuario", usuario);
-        
-    }catch (Exception ex){
-         System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
- 
-    }   
-        
-    RequestDispatcher dispatcher = request.getRequestDispatcher("gerenciarUsuario.jsp");
-    dispatcher.forward(request, response);   
+        String mensagem = null;
         
         
         
- 
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
