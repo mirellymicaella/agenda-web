@@ -92,7 +92,8 @@ Resultado:
     %>
 
     <tr>
-        <td><%= c.getId()%></td><td><%= c.getNome()%></td><td><%= c.getEndereco()%></td>
+        <td><%= c.getId()%></td><td><%= c.getNome()%></td>
+        <td><%= c.getEndereco() + ", " + c.getNumero() + ", " + c.getBairro() + "-" + c.getCidade() + "-" + c.getUf()%></td>
         <td><%= c.getTelefone()%></td><td><%= c.getCelular()%></td><td><%= c.getFax()%></td>
         <td><%= c.getEmail()%></td>
     </tr>

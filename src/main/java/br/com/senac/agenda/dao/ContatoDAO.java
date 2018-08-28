@@ -154,6 +154,7 @@ public class ContatoDAO extends DAO<Contato>{
                 contato.setNumero(rs.getString("numero"));
                 contato.setBairro(rs.getString("bairro"));
                 contato.setCidade(rs.getString("cidade"));
+                contato.setUf(rs.getString("uf"));
                 contato.setEmail(rs.getString("email"));
             }
 
@@ -196,6 +197,7 @@ public class ContatoDAO extends DAO<Contato>{
                 contato.setNumero(rs.getString("numero"));
                 contato.setBairro(rs.getString("bairro"));
                 contato.setCidade(rs.getString("cidade"));
+                contato.setUf(rs.getString("uf"));
                 contato.setEmail(rs.getString("email"));
             }
             
@@ -231,7 +233,7 @@ public class ContatoDAO extends DAO<Contato>{
                 sb.append("and nome like ? ");
             }
             if (estado != null && !estado.trim().isEmpty()) {
-                sb.append("and estado = ? ");
+                sb.append("and uf = ? ");
             }
 
             connection = Conexao.getConnection();
@@ -262,11 +264,13 @@ public class ContatoDAO extends DAO<Contato>{
                 contato.setNumero(rs.getString("numero"));
                 contato.setBairro(rs.getString("bairro"));
                 contato.setCidade(rs.getString("cidade"));
+                contato.setUf(rs.getString("uf"));
                 contato.setEmail(rs.getString("email"));
                 lista.add(contato);
             }
 
         } catch (Exception ex) {
+            ex.printStackTrace();
             System.out.println("Ocorreu um erro ao fazer a consulta....");
         } finally {
             try {

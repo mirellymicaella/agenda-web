@@ -18,7 +18,7 @@
 
     <div class="form-group">
         <label for="codigo">Código</label>
-        <input type="text" class="form-control col-2" id="codigo" name="cdigo" readonly 
+        <input type="text" name="codigo" class="form-control col-2" id="codigo"  readonly 
                value="<%= usuario != null ? usuario.getId(): "" %>"/>
     </div>
 

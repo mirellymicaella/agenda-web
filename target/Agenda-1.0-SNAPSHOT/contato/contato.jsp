@@ -57,7 +57,7 @@
         <div class="col-7">
             <label for="endereco">Endereço</label>
             <input type="text" name="endereco" id="endereco"class="form-control " 
-                    value="<%= contato != null ? contato.getEndereco(): ""  %>"/>
+                    value="<%= contato != null ? contato.getEndereco() : ""  %>"/>
         </div>
 
         <div class="col-2">
