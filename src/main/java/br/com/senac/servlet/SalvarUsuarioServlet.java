@@ -1,4 +1,3 @@
-
 package br.com.senac.servlet;
 
 import br.com.senac.agenda.dao.UsuarioDAO;
@@ -11,7 +10,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 
 @WebServlet(name = "SalvarUsuarioServlet", urlPatterns = {"/usuario/SalvarUsuarioServlet"})
 public class SalvarUsuarioServlet extends HttpServlet {
@@ -27,41 +25,38 @@ public class SalvarUsuarioServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-    
-    String mensagem = null;
-    
-    try{
-        String nome = request.getParameter("nome");
-        String senha = request.getParameter("senha");
-        String codigo = request.getParameter("codigo");
-        Integer id = null;
+
+        String mensagem = null;
+
+        try {
+            String nome = request.getParameter("nome");
+            String senha = request.getParameter("senha");
+            String codigo = request.getParameter("codigo");
+            Integer id = 0;
 
             if (codigo != null && !codigo.trim().isEmpty()) {
                 id = new Integer(codigo);
             }
-        
-        Usuario usuario = new Usuario();
-        usuario.setId(0);
-        usuario.setNome(nome);
-        usuario.setSenha(senha);
-        
-        UsuarioDAO dao = new UsuarioDAO();
-        dao.salvar(usuario);
-        mensagem = "Salvo com sucesso!!";
-        request.setAttribute("mensagem", mensagem);
-        request.setAttribute("usuario", usuario);
-        
-    }catch (Exception ex){
-         System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
- 
-    }   
-        
-    RequestDispatcher dispatcher = request.getRequestDispatcher("gerenciarUsuario.jsp");
-    dispatcher.forward(request, response);   
-        
-        
-        
- 
+
+            Usuario usuario = new Usuario();
+            usuario.setId(id);
+            usuario.setNome(nome);
+            usuario.setSenha(senha);
+
+            UsuarioDAO dao = new UsuarioDAO();
+            dao.salvar(usuario);
+            mensagem = "Salvo com sucesso!!";
+            request.setAttribute("mensagem", mensagem);
+            request.setAttribute("usuario", usuario);
+
+        } catch (Exception ex) {
+            System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+
+        }
+
+        RequestDispatcher dispatcher = request.getRequestDispatcher("gerenciarUsuario.jsp");
+        dispatcher.forward(request, response);
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

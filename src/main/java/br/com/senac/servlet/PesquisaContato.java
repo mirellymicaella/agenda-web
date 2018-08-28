@@ -5,6 +5,7 @@ import br.com.senac.agenda.dao.ContatoDAO;
 import br.com.senac.agenda.model.Contato;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,8 +14,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-@WebServlet(name = "NovoContatoServlet", urlPatterns = {"/contato/NovoContatoServlet"})
-public class NovoContatoServlet extends HttpServlet {
+@WebServlet(name = "PesquisaContato", urlPatterns = {"/contato/PesquisaContato"})
+public class PesquisaContato extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -27,64 +28,35 @@ public class NovoContatoServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-     
+        
         String mensagem = null;
         
         try{
-        String nome = request.getParameter("nome");
-        String telefone = request.getParameter("telefone");
-        String celular = request.getParameter("celular");
-        String fax = request.getParameter("fax");
-        String cep = request.getParameter("cep");
-        String endereco = request.getParameter("endereco");
-        String numero = request.getParameter("numero");
-        String bairro = request.getParameter("bairro");
-        String cidade = request.getParameter("cidade");
-        String uf = request.getParameter("uf");
-        String email = request.getParameter("email");
-        String codigo = request.getParameter("codigo");
-        Integer id =0;
+            
+            String nome= request.getParameter("nome");
+            String codigo = request.getParameter("codigo");
+            String estado = request.getParameter("estado");
+            
+            
+            Integer id = null;
 
             if (codigo != null && !codigo.trim().isEmpty()) {
                 id = new Integer(codigo);
             }
-        
-        Contato contato = new Contato();
-        contato.setId(id);
-        contato.setNome(nome);
-        contato.setTelefone(telefone);
-        contato.setCelular(celular);
-        contato.setFax(fax);
-        contato.setCep(cep);
-        contato.setEndereco(endereco);
-        contato.setNumero(numero);
-        contato.setBairro(bairro);
-        contato.setCidade(cidade);
-        contato.setUf(uf);
-        contato.setEmail(email);
-        
-        
-        ContatoDAO dao = new ContatoDAO();
-        dao.salvar(contato);
-        mensagem = "Salvo com sucesso!";
-        request.setAttribute("mensagem", mensagem);
-        request.setAttribute("contato",contato);
-        
-        }catch(Exception ex ){
-            System.out.println("Erro ao salvar contato");
             
+            ContatoDAO dao = new ContatoDAO();
+            
+            List<Contato> lista = dao.getByFiltro(id, nome, estado);
+            
+            request.setAttribute("lista", lista);
+            
+        }catch(NumberFormatException ex){
+            mensagem = "Campo digito somente com valor numerico";
+            request.setAttribute("mensagem", mensagem);
         }
         
-        RequestDispatcher dispatcher = request.getRequestDispatcher("contato.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("pesquisarContato.jsp");
         dispatcher.forward(request, response);
-        
-        
-        
-        
-        
-        
-        
-        
         
         
         

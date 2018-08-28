@@ -14,10 +14,6 @@
 <%}%>
 
 
-
-
-
-
 <form action="./SalvarUsuarioServlet" method="post" style="margin-left: 70px">
 
     <div class="form-group">

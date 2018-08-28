@@ -2,9 +2,13 @@
 package br.com.senac.agenda.dao;
 
 import br.com.senac.agenda.model.Contato;
+import br.com.senac.agenda.model.Usuario;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -61,19 +65,225 @@ public class ContatoDAO extends DAO<Contato>{
     }
 
     @Override
-    public void deletar(Contato objeto) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void deletar(Contato contato) {
+        String query = "DELETE FROM  contato WHERE id = ? ";
+        Connection connection = null;
+        
+        try{
+            connection = Conexao.getConnection();
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setInt(1, contato.getId());
+            ps.executeUpdate();
+        
+        }catch (Exception ex){
+            System.out.println("Erro ao deletar contato");
+        }finally{
+            try{
+                connection.close();
+            }catch (SQLException ex){
+                System.out.println("Falha ao fechar conexão");
+            }
+        }
+ 
     }
 
     @Override
     public List<Contato> listar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String query = "select * from contato;";
+        List<Contato> lista = new ArrayList<>();
+        Connection connection = null;
+
+        try {
+            connection = Conexao.getConnection();//abre conexao com o banco
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(query); //executar a query e retorna um conjunto de resultados (tabela)
+
+            while (rs.next()) {
+                Contato contato = new Contato();
+                contato.setId(rs.getInt("id"));
+                contato.setNome(rs.getString("nome"));
+                contato.setTelefone(rs.getString("telefone"));
+                contato.setCelular(rs.getString("celular"));
+                contato.setFax(rs.getString("fax"));
+                contato.setCep(rs.getString("cep"));
+                contato.setEndereco(rs.getString("endereco"));
+                contato.setNumero(rs.getString("numero"));
+                contato.setBairro(rs.getString("bairro"));
+                contato.setCidade(rs.getString("cidade"));
+                contato.setEmail(rs.getString("email"));
+                
+                lista.add(contato);
+            }
+
+        } catch (Exception ex) {
+            System.out.println("Ocorreu um erro ao fazer a consulta....");
+        } finally {
+            try {
+                connection.close();
+            } catch (SQLException ex) {
+                System.out.println("Falha ao fechar conexao....");
+            }
+        }
+
+        return lista;
+        
+   
     }
 
     @Override
     public Contato get(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Contato contato = null;
+        Connection connection = null;
+        String query = "select * from contato where id= ?;";
+
+        try {
+            connection = Conexao.getConnection();
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.first()) {
+                contato = new Contato();
+                contato.setId(rs.getInt("id"));
+                contato.setNome(rs.getString("nome"));
+                contato.setTelefone(rs.getString("telefone"));
+                contato.setCelular(rs.getString("celular"));
+                contato.setFax(rs.getString("fax"));
+                contato.setCep(rs.getString("cep"));
+                contato.setEndereco(rs.getString("endereco"));
+                contato.setNumero(rs.getString("numero"));
+                contato.setBairro(rs.getString("bairro"));
+                contato.setCidade(rs.getString("cidade"));
+                contato.setEmail(rs.getString("email"));
+            }
+
+        } catch (Exception e) {
+            System.out.println("Falha ao execultar consulta.......");
+
+        } finally {
+
+            try {
+                connection.close();
+            } catch (Exception e) {
+                System.out.println("Falha ao fechar conexão.....");
+            }
+        }
+
+        return contato;
+ 
     }
+    
+    public Contato getByName(String nome){
+        Contato contato = null;
+        Connection connection = null;
+        String query = "select * from contato where nome= ?;";
+
+        try {
+            connection = Conexao.getConnection();
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setString(1, nome);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.first()) {
+                contato = new Contato();
+                contato.setId(rs.getInt("id"));
+                contato.setNome(rs.getString("nome"));
+                contato.setTelefone(rs.getString("telefone"));
+                contato.setCelular(rs.getString("celular"));
+                contato.setFax(rs.getString("fax"));
+                contato.setCep(rs.getString("cep"));
+                contato.setEndereco(rs.getString("endereco"));
+                contato.setNumero(rs.getString("numero"));
+                contato.setBairro(rs.getString("bairro"));
+                contato.setCidade(rs.getString("cidade"));
+                contato.setEmail(rs.getString("email"));
+            }
+            
+        } catch (Exception ex) {
+            System.out.println("Falha ao execultar consulta.......");
+
+        } finally {
+
+            try {
+                connection.close();
+            } catch (Exception ex) {
+                System.out.println("Falha ao fechar conexão.....");
+            }
+        }
+
+        return contato;
+
+    }
+    
+    public List<Contato> getByFiltro(Integer id, String nome, String estado) {
+        Contato contato = null;
+        Connection connection = null;
+        List<Contato> lista = new ArrayList<>();
+
+        try {
+
+            StringBuilder sb = new StringBuilder("select * from contato where 1=1 ");
+
+            if (id != null) {
+                sb.append("and id = ? ");
+            }
+            if (nome != null && !nome.trim().isEmpty()) {
+                sb.append("and nome like ? ");
+            }
+            if (estado != null && !estado.trim().isEmpty()) {
+                sb.append("and estado = ? ");
+            }
+
+            connection = Conexao.getConnection();
+            PreparedStatement ps = connection.prepareStatement(sb.toString());
+
+            int index = 0;
+
+            if (id != null) {
+                ps.setInt(++index, id);
+            }
+            if (nome != null && !nome.trim().isEmpty()) {
+                ps.setString(++index, "%" + nome + "%");
+            }
+            if (estado != null && !estado.trim().isEmpty()) {
+                ps.setString(++index, estado);
+            }
+
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                contato = new Contato();
+                contato.setId(rs.getInt("id"));
+                contato.setNome(rs.getString("nome"));
+                contato.setTelefone(rs.getString("telefone"));
+                contato.setCelular(rs.getString("celular"));
+                contato.setFax(rs.getString("fax"));
+                contato.setCep(rs.getString("cep"));
+                contato.setEndereco(rs.getString("endereco"));
+                contato.setNumero(rs.getString("numero"));
+                contato.setBairro(rs.getString("bairro"));
+                contato.setCidade(rs.getString("cidade"));
+                contato.setEmail(rs.getString("email"));
+                lista.add(contato);
+            }
+
+        } catch (Exception ex) {
+            System.out.println("Ocorreu um erro ao fazer a consulta....");
+        } finally {
+            try {
+                connection.close();
+            } catch (SQLException ex) {
+                System.out.println("Falha ao fechar conexao....");
+            }
+        }
+
+        return lista;
+
+    }
+    
+    
+    
+    
+    
     
 }
 
