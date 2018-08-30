@@ -5,8 +5,9 @@ S:\Turma 467 - UC 10 Noturno\Mirelly\Agenda\src\main\java\br\com\senac\servlet\S
 S:\Turma 467 - UC 10 Noturno\Mirelly\Agenda\src\main\java\br\com\senac\agenda\dao\Conexao.java
 S:\Turma 467 - UC 10 Noturno\Mirelly\Agenda\src\main\java\br\com\senac\agenda\dao\DAO.java
 S:\Turma 467 - UC 10 Noturno\Mirelly\Agenda\src\main\java\br\com\senac\agenda\model\Contato.java
-S:\Turma 467 - UC 10 Noturno\Mirelly\Agenda\src\main\java\br\com\senac\servlet\LoginServlet.java
-S:\Turma 467 - UC 10 Noturno\Mirelly\Agenda\src\main\java\br\com\senac\agenda\model\Usuario.java
 S:\Turma 467 - UC 10 Noturno\Mirelly\Agenda\src\main\java\br\com\senac\servlet\NovoContatoServlet.java
 S:\Turma 467 - UC 10 Noturno\Mirelly\Agenda\src\main\java\br\com\senac\servlet\PesquisaContato.java
 S:\Turma 467 - UC 10 Noturno\Mirelly\Agenda\src\main\java\br\com\senac\agenda\dao\UsuarioDAO.java
+S:\Turma 467 - UC 10 Noturno\Mirelly\Agenda\src\main\java\br\com\senac\servlet\LoginServlet.java
+S:\Turma 467 - UC 10 Noturno\Mirelly\Agenda\src\main\java\br\com\senac\agenda\model\Usuario.java
+S:\Turma 467 - UC 10 Noturno\Mirelly\Agenda\src\main\java\br\com\senac\servlet\DeletarUsuarioServlet.java

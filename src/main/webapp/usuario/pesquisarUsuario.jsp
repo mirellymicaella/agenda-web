@@ -31,9 +31,12 @@
         </div>
 
         
-        <button type="submit" class="btn btn-default">Pesquisar</button>
-
+        <button type="submit" class="btn btn-primary">Pesquisar</button>
     </form>
+    <form class="form-inline" action="./SalvarUsuarioServlet">
+        <button type="submit" class="btn btn-primary">Adicionar</button>
+    </form>
+    
 </fieldset>
 
 <hr/>
@@ -43,7 +46,7 @@ Resultado:
 <table class="table table-hover">
     <thead>
         <tr>
-            <th>Código</th> <th>Nome</th>
+            <th style="width: 100px;">Código</th>   <th>Nome</th>   <th style="width: 10px;"></th>
         </tr>
     </thead>
 
@@ -54,7 +57,40 @@ Resultado:
 
     <tr>
         <td><%= u.getId()%></td><td><%= u.getNome()%></td>
+        
+        <td> 
+
+            <a href="./SalvarUsuarioServlet?id=<%= u.getId() %>" > <img src="../resourses/imagens/usuario/pencil-blue-icon.png" /> </a> 
+
+            <a data-toggle="modal" data-target="#myModal">
+                <img src="../resourses/imagens/usuario/Button-Delete-icon.png" />
+
+                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Confrimação</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                Deseja mesmo excluuir ?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Não</button>
+                                <a href="./DeletarUsuarioServlet?id=<%= u.getId()%>" class="btn btn-outline-success" >Sim</a>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </a>
+        </td>
+     
     </tr>
+    
 
     <% } // for
 

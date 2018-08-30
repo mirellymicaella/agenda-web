@@ -14,18 +14,38 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "SalvarUsuarioServlet", urlPatterns = {"/usuario/SalvarUsuarioServlet"})
 public class SalvarUsuarioServlet extends HttpServlet {
 
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        String codigo = request.getParameter("id");
+
+        Integer id = 0;
+        if (codigo != null && !codigo.trim().isEmpty()) {
+            id = new Integer(codigo);
+        }
+        
+        UsuarioDAO dao = new UsuarioDAO();
+        Usuario usuario = dao.get(id);
+        
+        request.setAttribute("usuario", usuario);
+        
+        RequestDispatcher dispatcher = request.getRequestDispatcher("gerenciarUsuario.jsp");
+        dispatcher.forward(request, response);
+
+    }
+
     /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
+     * Handles the HTTP <code>POST</code> method.
      *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
         String mensagem = null;
 
         try {
@@ -56,36 +76,6 @@ public class SalvarUsuarioServlet extends HttpServlet {
 
         RequestDispatcher dispatcher = request.getRequestDispatcher("gerenciarUsuario.jsp");
         dispatcher.forward(request, response);
-
-    }
-
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
-
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
     }
 
     /**

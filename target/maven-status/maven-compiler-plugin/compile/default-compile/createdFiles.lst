@@ -1,12 +1,13 @@
 br\com\senac\agenda\dao\Conexao.class
+br\com\senac\servlet\DeletarUsuarioServlet.class
 br\com\senac\servlet\PesquisaContato.class
-br\com\senac\servlet\NovoContatoServlet.class
-br\com\senac\agenda\dao\DAO.class
-br\com\senac\servlet\LoginServlet.class
-br\com\senac\servlet\LogoutServlet.class
 br\com\senac\agenda\dao\UsuarioDAO.class
 br\com\senac\agenda\model\Contato.class
 br\com\senac\agenda\dao\ContatoDAO.class
 br\com\senac\servlet\SalvarUsuarioServlet.class
 br\com\senac\servlet\PesquisaUsuario.class
+br\com\senac\servlet\NovoContatoServlet.class
+br\com\senac\agenda\dao\DAO.class
+br\com\senac\servlet\LoginServlet.class
+br\com\senac\servlet\LogoutServlet.class
 br\com\senac\agenda\model\Usuario.class

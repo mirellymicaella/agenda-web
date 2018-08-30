@@ -33,8 +33,8 @@
         <input type="password" name="senha" class="form-control col-xl-6" id="senha" placeholder="Senha" />
     </div>
     <div class="form-group">
-        <button type="submit" class="btn btn-defaut">Salvar</button>
-        <button type="reset" class="btn btn-defaut">Cancelar</button>
+        <button type="submit" class="btn btn-defaut-primary">Salvar</button>
+        <button type="reset" class="btn btn-defaut-danger">Cancelar</button>
     </div>
 </form></center
 
