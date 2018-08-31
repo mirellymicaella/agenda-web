@@ -27,7 +27,7 @@ public class DeletarUsuarioServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        String mensagem = null;
+        String mensagem;
         
         try{
         

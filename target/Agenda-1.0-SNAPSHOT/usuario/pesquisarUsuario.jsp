@@ -60,10 +60,10 @@ Resultado:
         
         <td> 
 
-            <a href="./SalvarUsuarioServlet?id=<%= u.getId() %>" > <img src="../resourses/imagens/usuario/pencil-blue-icon.png" /> </a> 
+            <a href="./SalvarUsuarioServlet?id=<%= u.getId() %>" > <img src="../resourses/imagens/pencil-blue-icon.png" /> </a> 
 
             <a data-toggle="modal" data-target="#myModal">
-                <img src="../resourses/imagens/usuario/Button-Delete-icon.png" />
+                <img src="../resourses/imagens/Button-Delete-icon.png" />
 
                 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">

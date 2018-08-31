@@ -1,9 +1,9 @@
-
 package br.com.senac.agenda.model;
 
 public class Contato {
+
     private int id;
-    private String  nome;
+    private String nome;
     private String telefone;
     private String celular;
     private String fax;
@@ -17,7 +17,6 @@ public class Contato {
 
     public Contato() {
     }
-
 
     public Contato(String nome, String telefone, String celular, String fax, String cep, String endereco, String numero, String bairro, String cidade, String uf, String email) {
         this.nome = nome;
@@ -40,8 +39,6 @@ public class Contato {
     public void setId(int id) {
         this.id = id;
     }
-    
-    
 
     public String getNome() {
         return nome;
@@ -130,15 +127,20 @@ public class Contato {
     public void setEmail(String email) {
         this.email = email;
     }
-    
-    
-    
-    
 
+    public String getEnderecoTruncado() {
 
-    
-    
-    
-    
-    
+        String endereco = this.endereco + ", " + this.numero + ", " + this.bairro + "-" + this.cidade + "-" + this.uf;
+        if (endereco.length() >= 30) {
+            return endereco.substring(0, 30) + "...";
+        }
+
+        return endereco;
+    }
+
+    public String getEnderecoCompleto() {
+
+        return this.endereco + ", " + this.numero + ", " + this.bairro + "-" + this.cidade + "-" + this.uf;
+    }
+
 }

@@ -14,61 +14,63 @@
 
 
 
+
+
 <fieldset >
     <center> <b><legend>Pesquisa de Contato </b></legend> </center>
     <form  action="./PesquisaContato" method="post">
 
         <div class="row">
-            
-        <div class="form-group col-md-2" >
-            <label for='codigo'>Código</label>
-            <input name="codigo" class="form-control" id="codigo" type="text"/>
-        </div>
 
-        <div class="form-group col-md-6" >
-            <label style="margin-right: 10px">Nome</label>
-            <input name="nome" id="nome" type="text" class="form-control form-control-sm"/>
-        </div>
-        
-        <div class="form-group col-2" s>
-        <label style="margin-right: 10px">Estado</label>   
-        
-        <select name="estado" class="custom-select">
-        <option value=""  selected="true">--</option>    
-	<option value="AC">AC</option>
-	<option value="AL">AL</option>
-	<option value="AP">AP</option>
-	<option value="AM">AM</option>
-	<option value="BA">BA</option>
-	<option value="CE">CE</option>
-	<option value="DF">DF</option>
-	<option value="ES">ES</option>
-	<option value="GO">GO</option>
-	<option value="MA">MA</option>
-	<option value="MT">MT</option>
-	<option value="MS">MS</option>
-	<option value="MG">MG</option>
-	<option value="PA">PA</option>
-	<option value="PB">PB</option>
-	<option value="PR">PR</option>
-	<option value="PE">PE</option>
-	<option value="PI">PI</option>
-	<option value="RJ">RJ</option>
-	<option value="RN">RN</option>
-	<option value="RS">RS</option>
-	<option value="RO">RO</option>
-	<option value="RR">RR</option>
-	<option value="SC">SC</option>
-	<option value="SP">SP</option>
-	<option value="SE">Se</option>
-	<option value="TO">TO</option>
-         </select>
-       <div class="invalid-feedback">Example invalid custom select feedback</div>
-       </div>
+            <div class="form-group col-md-2" >
+                <label for='codigo'>Código</label>
+                <input name="codigo" class="form-control" id="codigo" type="text"/>
+            </div>
+
+            <div class="form-group col-md-6" >
+                <label style="margin-right: 10px">Nome</label>
+                <input name="nome" id="nome" type="text" class="form-control form-control-sm"/>
+            </div>
+
+            <div class="form-group col-2" s>
+                <label style="margin-right: 10px">Estado</label>   
+
+                <select name="estado" class="custom-select">
+                    <option value=""  selected="true">--</option>    
+                    <option value="AC">AC</option>
+                    <option value="AL">AL</option>
+                    <option value="AP">AP</option>
+                    <option value="AM">AM</option>
+                    <option value="BA">BA</option>
+                    <option value="CE">CE</option>
+                    <option value="DF">DF</option>
+                    <option value="ES">ES</option>
+                    <option value="GO">GO</option>
+                    <option value="MA">MA</option>
+                    <option value="MT">MT</option>
+                    <option value="MS">MS</option>
+                    <option value="MG">MG</option>
+                    <option value="PA">PA</option>
+                    <option value="PB">PB</option>
+                    <option value="PR">PR</option>
+                    <option value="PE">PE</option>
+                    <option value="PI">PI</option>
+                    <option value="RJ">RJ</option>
+                    <option value="RN">RN</option>
+                    <option value="RS">RS</option>
+                    <option value="RO">RO</option>
+                    <option value="RR">RR</option>
+                    <option value="SC">SC</option>
+                    <option value="SP">SP</option>
+                    <option value="SE">Se</option>
+                    <option value="TO">TO</option>
+                </select>
+                <div class="invalid-feedback">Example invalid custom select feedback</div>
+            </div>
 
             <div class="form-group col-2" style="margin-top: 30px;">
-        <button type="submit" class="btn btn-default">Pesquisar</button>
-       </div>
+                <button type="submit" class="btn btn-default">Pesquisar</button>
+            </div>
 
         </div>
     </form>
@@ -82,25 +84,29 @@ Resultado:
     <thead>
         <tr>
             <th>Código</th> <th>Nome</th><th>Endereço</th>
-            <th>Telefone</th><th>Celular</th><th>Fax</th><th>E-mail</th>
+            <th>Telefone</th><th>Celular</th><th>Fax</th><th>E-mail</th><th></th>
         </tr>
     </thead>
 
     <% if (lista != null && lista.size() > 0) {
             for (Contato c : lista) {
-           
+
     %>
 
     <tr>
         <td><%= c.getId()%></td><td><%= c.getNome()%></td>
-        <td><%= c.getEndereco() + ", " + c.getNumero() + ", " + c.getBairro() + "-" + c.getCidade() + "-" + c.getUf()%></td>
+        <td> <span data-toggle="tooltip" data-placement="top" title="<%= c.getEnderecoCompleto()%>"> <%= c.getEnderecoTruncado()%></span> </td>
         <td><%= c.getTelefone()%></td><td><%= c.getCelular()%></td><td><%= c.getFax()%></td>
         <td><%= c.getEmail()%></td>
+        <td style="width: 125px;">
+            <a  href="./"> <img src="../resourses/imagens/pencil-blue-icon.png" /> </a> 
+            <a> <img src="../resourses/imagens/Button-Delete-icon.png" /> </a> 
+        </td>
     </tr>
 
     <% } // for
 
-        } else {%>
+    } else {%>
 
     <tr >
         <td  colspan="2">Não Existem registros.</td>
@@ -114,10 +120,15 @@ Resultado:
 
 
 
-
-
-
-
-
-
 <jsp:include page="../footer.jsp" />
+
+<script type="text/javascript">
+
+ $(document).ready(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+      
+    });
+
+
+</script>
+

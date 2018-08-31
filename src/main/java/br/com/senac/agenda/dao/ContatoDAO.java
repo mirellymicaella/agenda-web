@@ -23,7 +23,7 @@ public class ContatoDAO extends DAO<Contato>{
                 query="INSERT INTO contato (nome,telefone,celular,fax,cep,endereco,numero,bairro,cidade,uf,email) "
                         + "values (?,?,?,?,?,?,?,?,?,?,?);";
             }else{
-                query="UPDATE contato SET nome = ?, telefone = ?, celular = ?, fax = ?, cep = ? , enderco = ? ,"
+                query="UPDATE contato SET nome = ?, telefone = ?, celular = ?, fax = ?, cep = ? , endereco = ? ,"
                         + "numero = ? , bairro = ? , cidade = ? , uf = ? , email = ? WHERE id = ? ;";
             }
             connection = Conexao.getConnection();
@@ -50,7 +50,8 @@ public class ContatoDAO extends DAO<Contato>{
                 ps.executeUpdate();
             }   
             
-        }catch(Exception ex){
+        }catch(Exception e){
+            e.printStackTrace();
             System.out.println("Erro ao salvar ");
             
         }finally{
