@@ -2,6 +2,24 @@
 <%@page import="br.com.senac.agenda.model.Contato"%>
 <jsp:include page="../header.jsp"/>
 
+<script type="text/javascript">
+
+    function excluir(id, nome) {
+
+        $('#nomeContato').text(nome);
+
+        var formNome = $('#txtNome').val();
+        var formId = $('#txtCodigo').val();
+
+        var url = './DeletarContatoServlet?id=' + id + "&formNome=" + formNome + "&formId=" + formId;
+
+        $('#btnConfirmar').attr('href', url);
+
+    }
+
+
+</script>
+
 <% List<Contato> lista = (List) request.getAttribute("lista"); %>
 
 <% String mensagem = (String) request.getAttribute("mensgaem"); %>
@@ -69,10 +87,12 @@
             </div>
 
             <div class="form-group col-2" style="margin-top: 30px;">
-                <button type="submit" class="btn btn-default">Pesquisar</button>
-            </div>
-
+                <button type="submit" class="btn btn-primary">Pesquisar</button>
+            </div>     
         </div>
+    </form>
+    <form class="form-inline" action="./NovoContatoServlet">
+        <button type="submit" class="btn btn-primary">Adicionar</button>
     </form>
 </fieldset>
 
@@ -98,9 +118,15 @@ Resultado:
         <td> <span data-toggle="tooltip" data-placement="top" title="<%= c.getEnderecoCompleto()%>"> <%= c.getEnderecoTruncado()%></span> </td>
         <td><%= c.getTelefone()%></td><td><%= c.getCelular()%></td><td><%= c.getFax()%></td>
         <td><%= c.getEmail()%></td>
+
         <td style="width: 125px;">
-            <a  href="./"> <img src="../resourses/imagens/pencil-blue-icon.png" /> </a> 
-            <a> <img src="../resourses/imagens/Button-Delete-icon.png" /> </a> 
+            <a  href="./NovoContatoServlet?id=<%= c.getId()%>">
+                <img src="../resourses/imagens/pencil-blue-icon.png" />
+            </a>
+            <a  href=""data-toggle="modal" data-target="#modalExclusao" 
+                onclick="excluir(<%= c.getId()%>, '<%= c.getNome()%>');">
+                <img src="../resourses/imagens/Button-Delete-icon.png" />
+            </a>
         </td>
     </tr>
 
@@ -113,20 +139,39 @@ Resultado:
     </tr>
 
     <%}%>
-
-
-
 </table>
 
+<!-- Modal -->
+<div class="modal fade" id="modalExclusao" tabindex="-1" role="dialog" 
+     aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Exclusão</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Deseja realmente apagar o contato <span id="nomeContato"></span> ?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+
+                <a  id="btnConfirmar" class="btn btn-primary">Confirmar</a>
+            </div>
+        </div>
+    </div>
+</div> 
 
 
 <jsp:include page="../footer.jsp" />
 
 <script type="text/javascript">
 
- $(document).ready(function () {
+    $(document).ready(function () {
         $('[data-toggle="tooltip"]').tooltip();
-      
+
     });
 
 
